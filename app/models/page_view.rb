@@ -1,5 +1,13 @@
 class PageView < Sequel::Model
 
+  db.extension :date_arithmetic
+
+  def self.top_urls
+    select_group{ [Sequel.as(date(created_at), date), url] }.
+    select_append{ Sequel.as(count(id), visits) }.
+    where { date(created_at) > date(Sequel.date_sub(now(0), days: 5))}
+  end
+
   def self.repopulate_with_random_dataset
     available_urls = %w(
       http://apple.com
