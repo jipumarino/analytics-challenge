@@ -1,5 +1,7 @@
 class PageView < Sequel::Model
 
+  PageView.plugin :timestamps
+
   def self.top_urls
     select_group{ [Sequel.as(date(created_at), date), url] }.
     select_append{ Sequel.as(count(id), visits) }.
