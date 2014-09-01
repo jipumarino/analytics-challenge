@@ -47,8 +47,7 @@ class PageView < Sequel::Model
         self.create(
           url: available_urls.sample,
           referrer: available_referrers.sample,
-          created_at: random_date_generator.call,
-          hash: ''
+          created_at: random_date_generator.call
         )
       end
     end
