@@ -10,7 +10,7 @@ class PageView < Sequel::Model
   def self.top_urls
     select_group{ [Sequel.as(date(created_at), date), url] }.
     select_append{ Sequel.as(count(id), visits) }.
-    where { date(created_at) > date(Sequel.date_sub(now(0), days: 5))}
+    where { created_at > 4.days.ago.to_date }
   end
 
   def calcluate_hash_value
