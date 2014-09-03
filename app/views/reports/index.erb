@@ -6,6 +6,10 @@
   </select>
 
   <table ng-if="reportUrl.length > 0">
+    <tr>
+      <th>Date</th>
+      <th>URL stats</th>
+    </tr>
     <tr ng-repeat="(date, urlsData) in reportData">
       <td>{{date}}</td>
       <td>
