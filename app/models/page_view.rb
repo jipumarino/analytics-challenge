@@ -6,6 +6,7 @@ class PageView < Sequel::Model
   def validate
     super
     validates_presence [:url, :hash]
+    validates_format %r{^(https?://|$)}, [:url, :referrer]
   end
 
   def before_validation
@@ -16,7 +17,8 @@ class PageView < Sequel::Model
   def self.top_urls
     select_group{ [Sequel.as(date(created_at), date), url] }.
     select_append{ Sequel.as(count(id), visits) }.
-    where { created_at > 4.days.ago.to_date }
+    where { created_at > 4.days.ago.to_date }.
+    order { visits }
   end
 
   def self.top_referrers
