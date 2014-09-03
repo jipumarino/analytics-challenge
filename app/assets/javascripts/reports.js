@@ -2,10 +2,18 @@
 
 var reportsApp = angular.module('reportsApp', []);
 
-reportsApp.controller('ReportsController', function ($scope) {
+reportsApp.controller('ReportsController', function ($scope, $http) {
   $scope.availableReports = [
     {url: '/top_urls', name: 'Top URLs'},
     {url: '/top_referrers', name: 'Top referrers'}
   ]
+
+  $scope.reportData = {};
+
+  $scope.retrieveReport = function(reportUrl) {
+    $http.get(reportUrl).success(function(data) {
+      $scope.reportData = data;
+    });
+  }
 
 });
