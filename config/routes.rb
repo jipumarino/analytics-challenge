@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  # REST JSON interface
   get '/top_urls' => 'stats#top_urls'
   get '/top_referrers' => 'stats#top_referrers'
+
+  # Reports UI
+  get '/' => 'reports#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
