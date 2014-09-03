@@ -18,5 +18,6 @@ end
 Sequel.migration do
   change do
     self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20140829222644_create_page_views.rb')"
+    self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20140903025245_add_indices_to_page_views.rb')"
   end
 end
