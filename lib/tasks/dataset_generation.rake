@@ -2,7 +2,7 @@ namespace :dataset_generation do
 
   desc "Dummy dataset generation for Page Views"
   task generate_page_views: :environment do
-    available_urls = %w(
+    required_urls = %w(
       http://apple.com
       https://apple.com
       https://www.apple.com
@@ -10,13 +10,15 @@ namespace :dataset_generation do
       http://en.wikipedia.org
       http://opensource.org
     )
+    available_urls = required_urls.clone
 
-    available_referrers = %w(
+    required_referrers = %w(
       http://apple.com
       https://apple.com
       https://www.apple.com
       http://developer.apple.com
     ) + [nil]
+    available_referrers = required_referrers.clone
 
 
     def random_date
@@ -49,13 +51,30 @@ namespace :dataset_generation do
     PageView.truncate
 
     PageView.db.transaction do
-      1_000_000.times do
+      999_989.times do
         PageView.create(
           url: available_urls.sample,
           referrer: available_referrers.sample,
           created_at: random_date
         )
       end
+
+      required_urls.each do |url|
+        PageView.create(
+          url: url,
+          referrer: available_referrers.sample,
+          created_at: random_date
+        )
+      end
+
+      required_referrers.each do |referrer|
+        PageView.create(
+          url: available_urls.sample,
+          referrer: referrer,
+          created_at: random_date
+        )
+      end
+
     end
 
   end
