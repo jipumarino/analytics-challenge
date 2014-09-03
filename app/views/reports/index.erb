@@ -5,7 +5,7 @@
     <option ng-repeat="report in availableReports" value="{{report['url']}}">{{report['name']}}</option>
   </select>
 
-  <table>
+  <table ng-if="reportUrl.length > 0">
     <tr ng-repeat="(date, urlsData) in reportData">
       <td>{{date}}</td>
       <td>

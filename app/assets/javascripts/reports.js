@@ -11,9 +11,11 @@ reportsApp.controller('ReportsController', function ($scope, $http) {
   $scope.reportData = {};
 
   $scope.retrieveReport = function(reportUrl) {
-    $http.get(reportUrl).success(function(data) {
-      $scope.reportData = data;
-    });
+    if(reportUrl.length > 0) {
+      $http.get(reportUrl).success(function(data) {
+        $scope.reportData = data;
+      });
+    }
   }
 
 });
