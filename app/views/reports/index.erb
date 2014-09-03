@@ -14,7 +14,7 @@
       <td>{{date}}</td>
       <td>
         <span ng-if="urlsData.length == 0">No data available</span>
-        <ul>
+        <ol>
           <li ng-repeat="urlItem in urlsData">
             {{urlItem.url}}: {{urlItem.visits}} visits
             <div ng-if="urlItem.referrers != undefined" class="referrers">
@@ -22,7 +22,7 @@
               <p class="item" ng-repeat="referrer in urlItem.referrers">{{referrer.url || "No referrer"}} ({{referrer.visits}})</p>
             </div>
           </li>
-        </ul>
+        </ol>
     </tr>
   </table>
 
