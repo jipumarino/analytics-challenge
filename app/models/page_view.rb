@@ -14,10 +14,9 @@ class PageView < Sequel::Model
   end
 
   def self.top_urls_for_day(date = Date.today, top_limit = 10)
-    select_group{ url }.
+    select_group(:url).
     select_append{ Sequel.as(count(id), visits) }.
-    where { created_at > date }.
-    where { created_at < date+1 }.
+    where(created_at: date..date+1).
     reverse_order(:visits).
     limit(top_limit)
   end
