@@ -1,0 +1,20 @@
+// Place all the styles related to the reports controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table {
+  border-collapse: collapse;
+  td {
+    border: 1px solid;
+    padding: 5px;
+    vertical-align: top;
+  }
+  .referrers {
+    font-size: 10px;
+
+    p.title {
+      font-weight: bold;
+    }
+  }
+}
+
