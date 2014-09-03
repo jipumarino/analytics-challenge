@@ -1,0 +1,7 @@
+<div ng-app="reportsApp" ng-controller="ReportsController">
+  Report:
+  <select ng-model="reportUrl">
+    <option></option>
+    <option ng-repeat="report in availableReports" value="{{report['url']}}">{{report['name']}}</option>
+  </select>
+</div>
