@@ -49,7 +49,7 @@ namespace :dataset_generation do
     PageView.truncate
 
     PageView.db.transaction do
-      10000.times do
+      1_000_000.times do
         PageView.create(
           url: available_urls.sample,
           referrer: available_referrers.sample,
