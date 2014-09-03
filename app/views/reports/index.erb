@@ -9,6 +9,7 @@
     <tr ng-repeat="(date, urlsData) in reportData">
       <td>{{date}}</td>
       <td>
+        <span ng-if="urlsData.length == 0">No data available</span>
         <ul>
           <li ng-repeat="urlItem in urlsData">
             {{urlItem.url}}: {{urlItem.visits}} visits
