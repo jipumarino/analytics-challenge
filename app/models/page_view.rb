@@ -32,18 +32,13 @@ class PageView < Sequel::Model
   end
 
   def self.top_referrers
-    data = 4.downto(0).map do |d|
-      date = d.days.ago.to_date
-      [
-        date.to_s,
-        top_urls_for_day(date).to_a.map do |pv|
-          {
-            url: pv[:url],
-            visits: pv[:visits],
-            referrers: self.top_referrers_for_url_and_day(pv[:url], date).to_a.map(&:values)
-          }
-        end
-      ]
+    data = top_urls
+    data.each do |date, url_stats|
+      date = Date.parse(date)
+      url_stats.each do |stat|
+        p stat
+        stat[:referrers] = self.top_referrers_for_url_and_day(stat[:url], date).to_a.map(&:values)
+      end
     end
 
     return Hash[data]
