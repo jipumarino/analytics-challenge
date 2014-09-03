@@ -12,5 +12,6 @@ class StatsController < ApplicationController
   end
 
   def top_referrers
+    render json: PageView.top_referrers
   end
 end
