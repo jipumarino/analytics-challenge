@@ -4,4 +4,17 @@
     <option></option>
     <option ng-repeat="report in availableReports" value="{{report['url']}}">{{report['name']}}</option>
   </select>
+
+  <table>
+    <tr ng-repeat="(date, urlsData) in reportData">
+      <td>{{date}}</td>
+      <td>
+        <ul>
+          <li ng-repeat="urlItem in urlsData">
+            {{urlItem.url}}: {{urlItem.visits}} visits
+          </li>
+        </ul>
+    </tr>
+  </table>
+
 </div>
