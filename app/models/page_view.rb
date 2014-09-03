@@ -14,12 +14,12 @@ class PageView < Sequel::Model
     super
   end
 
-  def self.top_urls
+  def self.top_urls(top_limit = nil)
     data = 4.downto(0).map do |d|
       date = d.days.ago.to_date
       [
         date.to_s,
-        top_urls_for_day(date).to_a.map do |pv|
+        top_urls_for_day(date, top_limit).to_a.map do |pv|
           {
             url: pv[:url],
             visits: pv[:visits],
@@ -32,7 +32,7 @@ class PageView < Sequel::Model
   end
 
   def self.top_referrers
-    data = top_urls
+    data = top_urls(10)
     data.each do |date, url_stats|
       date = Date.parse(date)
       url_stats.each do |stat|
@@ -44,7 +44,7 @@ class PageView < Sequel::Model
     return Hash[data]
   end
 
-  def self.top_urls_for_day(date = Date.today, top_limit = 10)
+  def self.top_urls_for_day(date = Date.today, top_limit = nil)
     select_group(:url).
     select_append{ Sequel.as(count(id), visits) }.
     where(created_at: date..date+1).
