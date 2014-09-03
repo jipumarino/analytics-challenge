@@ -1,6 +1,12 @@
 class PageView < Sequel::Model
 
-  PageView.plugin :timestamps
+  plugin :timestamps
+  plugin :validation_helpers
+
+  def validate
+    super
+    validates_presence [:url, :hash]
+  end
 
   def before_validation
     calcluate_hash_value
